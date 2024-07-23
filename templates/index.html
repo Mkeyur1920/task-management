@@ -1,0 +1,155 @@
+{%extends 'base.html'%} {% block head %}
+
+<div
+  style="
+    background-color: #333;
+    color: white;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  "
+>
+  <!-- Left side: Website name and symbol -->
+
+  <div style="display: flex; align-items: center">
+    <img
+      src="../static/logo/main_logo.png"
+      alt="Website Logo"
+      style="height: 40px; margin-right: 10px"
+    />
+    <span style="font-size: 24px; font-weight: bold">Task Master</span>
+  </div>
+
+  <!-- Right side: Menu bar -->
+  <div>
+    <a
+      href="#home"
+      style="color: white; text-decoration: none; margin-left: 24px"
+      >Home</a
+    >
+    <a
+      href="#about"
+      style="color: white; text-decoration: none; margin-left: 24px"
+      >About</a
+    >
+    <a
+      href="#services"
+      style="color: white; text-decoration: none; margin-left: 24px"
+      >Services</a
+    >
+    <a
+      href="#contact"
+      style="color: white; text-decoration: none; margin-left: 24px"
+      >Contact</a
+    >
+    <a
+      href="#profile"
+      style="color: white; text-decoration: none; margin-left: 24px"
+      >Profile</a
+    >
+  </div>
+</div>
+
+<div class="content">
+  <h1>Task Table</h1>
+  <table style="width: 100%; border-collapse: collapse; margin: 20px 0">
+    <thead>
+      <tr style="background-color: #f2f2f2">
+        <th style="border: 1px solid #ddd; padding: 8px">Task</th>
+        <th style="border: 1px solid #ddd; padding: 8px">Added</th>
+        <th style="border: 1px solid #ddd; padding: 8px">Actions</th>
+      </tr>
+    </thead>
+
+    {% for task in tasks %}
+
+    <tr>
+      <td style="border: 1px solid #ddd; padding: 8px">{{task.content}}</td>
+      <td style="border: 1px solid #ddd; padding: 8px">
+        {{task.date_created.date()}}
+      </td>
+      <td style="border: 1px solid #ddd; padding: 8px">
+        <form action="/update/{{task.id}}" style="display: inline">
+          <button
+            type="submit"
+            style="
+              background-color: #4caf50;
+              color: white;
+              padding: 10px 20px;
+              border: none;
+              border-radius: 4px;
+              cursor: pointer;
+            "
+          >
+            Edit
+          </button>
+        </form>
+
+        <form action="/delete/{{task.id}}" style="display: inline">
+          <button
+            type="submit"
+            style="
+              background-color: #f44336;
+              color: white;
+              padding: 10px 20px;
+              border: none;
+              border-radius: 4px;
+              cursor: pointer;
+            "
+          >
+            Delete
+          </button>
+        </form>
+      </td>
+    </tr>
+
+    {% endfor %}
+  </table>
+
+  <form
+    action="/"
+    method="POST"
+    style="
+      background-color: #f2f2f2;
+      padding: 20px;
+      max-width: 400px;
+      margin: 0 auto;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    "
+  >
+    <label
+      for="task"
+      style="display: block; margin-bottom: 10px; font-weight: bold"
+      >Task:</label
+    >
+    <input
+      type="text"
+      id="task"
+      name="task"
+      style="
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+      "
+    />
+
+    <input
+      type="submit"
+      value="Add Task"
+      style="
+        background-color: #4caf50;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      "
+    />
+  </form>
+</div>
+{% endblock %} {% block body %} {% endblock %}
